@@ -4,9 +4,11 @@ body{
 
 
 .upload {
+    display: flex;
+    flex-direction: column;
 
 }
 
 form {
-    display: none;
+    /* display: none; */
 }
