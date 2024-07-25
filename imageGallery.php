@@ -37,7 +37,8 @@
     ?>
 
     <div class="container-fluid pt-10">
-        <div class="upload-items">
+        <button id="show-upload-form" class="btn btn-primary mb-3 float-end">Upload an Image</button><br>
+        <div class="upload-items" id="upload-form" style="display: none;">
             <form action="imageGallery.php" method="post" enctype="multipart/form-data">
                 <input type="file" name="file-input" class="form-control mb-3" required>
                 <input type="submit" name="Upload" value="Upload" class="btn btn-primary">

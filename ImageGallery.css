@@ -1,14 +1,17 @@
-body{
-    background-color: rebeccapurple;
+#upload-form {
+    width: 350px;
+    float: right;
+    height: fit-content;
+    display: none;
+    position: relative;
+    opacity: 0.2;
+    padding: 20px;
+    border-radius: 10px;
+    z-index: 1000px;
+
 }
 
-
-.upload {
-    display: flex;
-    flex-direction: column;
-
-}
-
-form {
-    /* display: none; */
+#upload-form.show {
+    display: block;
+    opacity: 1;
 }
