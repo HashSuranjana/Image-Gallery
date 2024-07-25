@@ -1,13 +1,13 @@
 #upload-form {
-    width: 350px;
+    width: max-content;
     float: right;
     height: fit-content;
-    display: none;
     position: relative;
+    display: none;
     opacity: 0.2;
     padding: 20px;
     border-radius: 10px;
-    z-index: 1000px;
+    z-index: 2;
 
 }
 

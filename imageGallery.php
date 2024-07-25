@@ -28,18 +28,21 @@
 
             if (empty($errors)) {
                 if (move_uploaded_file($tmpName, $uploadTo . basename($fileName))) {
-                    echo "<div class='alert alert-success'>File uploaded successfully!</div>";
+                    // echo "<div class='alert alert-success'>File uploaded successfully!</div>";
                 } else {
                     $errors[] = 'There was an error uploading your file.';
                 }
             }
         }
     ?>
+    <div class="navbar navbar-light bg-light p-4 sticky-top">
+        <h3 class="float-start fw-bolder fst-italic">MyGallery.</h3>
+        <button id="show-upload-form" class="btn btn-primary float-end sticky-top">Upload an Image</button>        
+    </div>
 
     <div class="container-fluid pt-10">
-        <button id="show-upload-form" class="btn btn-primary mb-3 float-end">Upload an Image</button><br>
-        <div class="upload-items" id="upload-form" style="display: none;">
-            <form action="imageGallery.php" method="post" enctype="multipart/form-data">
+        <div class="upload-items relative-top border border-primary border-2" id="upload-form" style="display: none; z-index: 2 ;">
+            <form action="imageGallery.php" class = "container-sm" method="post" enctype="multipart/form-data">
                 <input type="file" name="file-input" class="form-control mb-3" required>
                 <input type="submit" name="Upload" value="Upload" class="btn btn-primary">
             </form>
