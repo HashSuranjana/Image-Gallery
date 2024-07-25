@@ -1,17 +1,23 @@
-#upload-form {
+.upload-items{
     width: max-content;
+    backdrop-filter: blur(10px);
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    position: fixed;
     float: right;
     height: fit-content;
-    position: relative;
-    display: none;
-    opacity: 0.2;
     padding: 20px;
     border-radius: 10px;
-    z-index: 2;
+    /* when positioning fixed initially it is in top left. so to get it customized we should give right:0 or bottom : 0 */
+    right: 0;
 
+}
+#upload-form {
+    display: none;
 }
 
 #upload-form.show {
     display: block;
     opacity: 1;
 }
+

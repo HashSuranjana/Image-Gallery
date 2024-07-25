@@ -9,7 +9,9 @@
 </head>
 <body>
     <?php 
+
         if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST["Upload"])) {
+            $startValue = true;
             $errors = [];
 
             $fileName = $_FILES['file-input']['name'];
@@ -26,46 +28,59 @@
                 $errors[] = 'File size is too high!';
             }
 
-            if (empty($errors)) {
-                if (move_uploaded_file($tmpName, $uploadTo . basename($fileName))) {
-                    // echo "<div class='alert alert-success'>File uploaded successfully!</div>";
-                } else {
-                    $errors[] = 'There was an error uploading your file.';
-                }
-            }
+            
         }
     ?>
-    <div class="navbar navbar-light bg-light p-4 sticky-top">
+    <nav class="navbar navbar-light bg-light p-4 sticky-top">
         <h3 class="float-start fw-bolder fst-italic">MyGallery.</h3>
         <button id="show-upload-form" class="btn btn-primary float-end sticky-top">Upload an Image</button>        
-    </div>
+    </nav>
 
     <div class="container-fluid pt-10">
-        <div class="upload-items relative-top border border-primary border-2" id="upload-form" style="display: none; z-index: 2 ;">
+        <div class="upload-items border border-primary border-2 bg-light me-1" id="upload-form" style="display: none; z-index: 2 ;">
             <form action="imageGallery.php" class = "container-sm" method="post" enctype="multipart/form-data">
-                <input type="file" name="file-input" class="form-control mb-3" required>
+                <input type="file" name="file-input" class="form-control form-control-sm mb-3" required>
+                <?php 
+                    
+
+                    if($startValue == true) {
+                        if (empty($errors)) {
+                            if (move_uploaded_file($tmpName, $uploadTo . basename($fileName))) {
+                                echo "<div class='alert alert-success'>File uploaded successfully!</div>";
+                            } else {
+                                $errors[] = 'There was an error uploading your file.';
+                            }
+                        }
+    
+                        if (!empty($errors)) {
+                            foreach ($errors as $error) {
+                                echo "<div class='alert alert-danger'>" . htmlspecialchars($error) . "</div>";
+                            }
+                        }
+                    }
+                    $startValue = false;
+                ?>
                 <input type="submit" name="Upload" value="Upload" class="btn btn-primary">
             </form>
         </div>
-
-        <?php 
-            if (!empty($errors)) {
-                foreach ($errors as $error) {
-                    echo "<div class='alert alert-danger'>" . htmlspecialchars($error) . "</div>";
-                }
-            } elseif (isset($_POST["Upload"]) && empty($errors)) {
-                
-                $imageList = scandir("ImageStore/") ;
-
-                foreach ($imageList as $image) {
-
-                    if(substr($image,strlen($image)-3) == "jpg") {
-                        echo "<img src='" . htmlspecialchars($uploadTo . $image) . "' alt='" . htmlspecialchars($fileName) . "' class='img-fluid mt-3'/>";
-                    }
-                }
-            }
-        ?>
     </div>
+
+    <?php 
+   
+        $imageList = scandir("ImageStore/") ;
+
+        echo "<div class= 'container pt-10 xxl-mx-auto'>";
+
+        foreach ($imageList as $image) {
+
+            if(substr($image,strlen($image)-3) == "jpg") {
+                echo "<img src='" . htmlspecialchars($uploadTo . $image) . "' alt='" . htmlspecialchars($fileName) . "'class='img-fluid col-sm-5 col-md-5 col-xxl-2 rounded mx-1 my-1'/>" ;
+            }
+        }
+        echo "</div>";
+        
+    ?>
+    
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <script src="imageGallery.js"></script>

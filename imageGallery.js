@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
     form.addEventListener('submit', () => {
         uploadForm.classList.remove('show');
         setTimeout(() => {
-            uploadForm.style.display = 'none';
-        }, 500); // Match the transition duration
+            uploadForm.style.display = 'block';
+        }, Infinity); // Match the transition duration
     });
 });
